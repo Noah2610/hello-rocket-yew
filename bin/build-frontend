@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# shellcheck source=./share.sh
+_dir="$( dirname "$0" )"
+source "${_dir}/share.sh"
+unset _dir
+
+set -e
+
+check "cargo-web"
+check_dir "$STATIC"
+
+# Build with cargo-web
+function build_web {
+  cargo web build \
+    --package "$FRONTEND_BIN" \
+    --bin "$FRONTEND_BIN" \
+    $CARGO_ARGS
+}
+
+# Copy generated js and wasm files to backend directory
+function copy_files {
+  target_dir="target/wasm32-unknown-unknown/${PROFILE}"
+  check_dir "$target_dir"
+  cp                       \ # Copy generated
+    "${target_dir}/*.js"   \ # JavaScript and
+    "${target_dir}/*.wasm" \ # WebAssembly files
+    "$STATIC"                # to the backend's static files directory.
+}
+
+build_web
+copy_files
