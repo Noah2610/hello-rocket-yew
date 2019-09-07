@@ -1,4 +1,5 @@
 use super::component_prelude::*;
+use super::entry::Props as EntryProps;
 use json::JsonValue;
 
 pub enum Msg {
@@ -85,10 +86,18 @@ impl TodoApp {
     }
 }
 
-impl Renderable<TodoApp> for TodoApp {
+impl Renderable<Self> for TodoApp {
     fn view(&self) -> Html<Self> {
-        let entries: Vec<String> = if let Some(data) = &self.json_data {
-            data["entries"].members().map(ToString::to_string).collect()
+        let entries: Vec<EntryProps> = if let Some(data) = &self.json_data {
+            data["entries"]
+                .members()
+                .map(|entry| {
+                    serde_json::from_str::<EntryProps>(
+                        entry.to_string().as_str(),
+                    )
+                    .expect("Failed deserializing JSON string")
+                })
+                .collect()
         } else {
             Vec::new()
         };

@@ -1,12 +1,13 @@
 use super::component_prelude::*;
+use super::entry::Props as EntryProps;
 
 #[derive(Properties)]
 pub struct Props {
-    pub entries: Vec<String>,
+    pub entries: Vec<EntryProps>,
 }
 
 pub struct EntryList {
-    entries: Vec<String>,
+    entries: Vec<EntryProps>,
 }
 
 impl Component for EntryList {
@@ -29,7 +30,7 @@ impl Component for EntryList {
     }
 }
 
-impl Renderable<EntryList> for EntryList {
+impl Renderable<Self> for EntryList {
     fn view(&self) -> Html<Self> {
         html! {
             <div>
@@ -44,11 +45,12 @@ impl Renderable<EntryList> for EntryList {
                             <ul>{
                                 for self.entries
                                     .iter()
-                                        .map(|entry| html! {
-                                            <li>{
-                                                entry
-                                            }</li>
-                                        })
+                                    .map(|entry| html! {
+                                        <li>
+                                            <Entry name=entry.name.clone()
+                                             completed=entry.completed />
+                                        </li>
+                                    })
                             }</ul>
                         }
                     }

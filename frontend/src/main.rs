@@ -3,6 +3,9 @@
 extern crate failure;
 extern crate json;
 #[macro_use]
+extern crate serde;
+extern crate serde_json;
+#[macro_use]
 extern crate yew;
 
 mod components;
