@@ -6,7 +6,6 @@ mod component_prelude {
     pub use super::helpers::*;
     pub use super::prelude::*;
     pub use failure::Error;
-    pub use yew::format;
     pub use yew::services::fetch::{
         FetchService,
         FetchTask,
@@ -14,6 +13,7 @@ mod component_prelude {
         Response,
         StatusCode,
     };
+    pub use yew::{format, Callback};
     pub use yew::{
         html,
         Component,
