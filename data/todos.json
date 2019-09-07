@@ -1,22 +1,27 @@
 {
   "entries": [
     {
+      "id": 0,
       "name": "Wash dishes",
       "completed": false
     },
     {
+      "id": 1,
       "name": "Take out trash",
       "completed": true
     },
     {
+      "id": 2,
       "name": "Go shopping",
       "completed": false
     },
     {
+      "id": 3,
       "name": "Go to sleep",
       "completed": false
     },
     {
+      "id": 4,
       "name": "Nurish thyself",
       "completed": false
     }

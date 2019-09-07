@@ -46,7 +46,7 @@ impl Renderable<Self> for EntryList {
                                 for self.entries
                                     .iter()
                                     .map(|entry| html! {
-                                        <li>
+                                        <li key=entry.id>
                                             <Entry name=entry.name.clone()
                                              completed=entry.completed />
                                         </li>

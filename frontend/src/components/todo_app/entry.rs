@@ -2,11 +2,13 @@ use super::component_prelude::*;
 
 #[derive(Properties, Debug, Deserialize)]
 pub struct Props {
+    pub id:        usize,
     pub name:      String,
     pub completed: bool,
 }
 
 pub struct Entry {
+    id:        usize,
     name:      String,
     completed: bool,
 }
@@ -17,6 +19,7 @@ impl Component for Entry {
 
     fn create(props: Self::Properties, _: ComponentLink<Self>) -> Self {
         Self {
+            id:        props.id,
             name:      props.name,
             completed: props.completed,
         }
