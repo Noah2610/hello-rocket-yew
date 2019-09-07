@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# shellcheck source=./util.sh  # Optional; fixes shellcheck's `source` warning
+_dir="$( dirname "$0" )"
+[ -f "${_dir}/util.sh" ] || bash "${_dir}/download-util.sh" || exit 1
+source "${_dir}/util.sh"
+unset _dir
+
+check "cargo-watch"
+check "cargo-web"
+
+MODE="debug"
+BACKEND="${ROOT}/backend"
+BACKEND_BIN="hello-rocket-yew-backend"
+FRONTEND="${ROOT}/frontend"
+FRONTEND_BIN="hello-rocket-yew-frontend"
+STATIC="${BACKEND}/static"
+
+check_dir "$STATIC"
+check_dir "$BACKEND"
+check_dir "$FRONTEND"
+
+watch_web_shell_cmd=\
+'_d="target/wasm32-unknown-unknown/'${MODE}'"; \
+  cp ${_d}/*.js '${STATIC}'; \
+  cp ${_d}/*.wasm '${STATIC}'; \
+  unset _d'
+cargo watch                   \
+  -w "${FRONTEND}/src"        \
+  -w "${FRONTEND}/Cargo.toml" \
+  -x "web build --package ${FRONTEND_BIN} --bin ${FRONTEND_BIN}" \
+  -s "${watch_web_shell_cmd}" \
+  &
+
+cargo watch                   \
+  -w "${BACKEND}/src"         \
+  -w "${BACKEND}/Cargo.toml"  \
+  -w "${BACKEND}/Rocket.toml" \
+  -x "run --bin ${BACKEND_BIN}"

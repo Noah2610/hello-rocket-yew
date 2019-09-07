@@ -1,0 +1,11 @@
+/target
+/*/target
+**/*.rs.bk
+
+/logs
+*.log
+/bin/util.sh
+
+# Backend
+/backend/static/*
+!/backend/static/.gitkeep

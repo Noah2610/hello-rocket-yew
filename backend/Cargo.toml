@@ -1,0 +1,9 @@
+[package]
+name = "hello-rocket-yew-backend"
+version = "0.1.0"
+authors = ["Noah Rosenzweig <rosenzweig.noah@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+rocket = "0.4.2"
+maud   = { version = "0.21.0", features = ["rocket"] }

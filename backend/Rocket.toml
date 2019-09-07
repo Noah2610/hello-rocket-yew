@@ -1,0 +1,5 @@
+[development]
+address    = "0.0.0.0"
+port       = 8000
+log        = "normal"
+secret_key = "Gl3csHWxi52YgMxIGD+Im5xm6yhZnjq3+nfiy7YCk/Q="
