@@ -7,5 +7,4 @@
 /bin/util.sh
 
 # Backend
-/backend/static/*
-!/backend/static/.gitkeep
+/backend/static

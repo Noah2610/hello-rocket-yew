@@ -12,7 +12,7 @@ pub fn index() -> Markup {
     html! {
         // link rel="stylesheet" href="static/styles.css" {}
         body {}
-        script src=("static/hello-rocket-yew-frontend.js") {}
+        script src=("/static/hello-rocket-yew-frontend.js") {}
     }
 }
 

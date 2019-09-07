@@ -1,9 +1,11 @@
 #!/bin/bash
 
 # shellcheck source=./share.sh
-_dir="$( dirname "$0" )"
-source "${_dir}/share.sh"
-unset _dir
+SHARE_FILE="$( dirname "$0" )/share.sh"
+source "$SHARE_FILE"
+SHARE_FILE="${ROOT}/bin/share.sh"
+
+THIS_FILE="${ROOT}/bin/$( basename "$0" )"
 
 check "cargo-watch"
 check_dir "$BACKEND"
@@ -15,15 +17,21 @@ function watch_backend {
     -w "${BACKEND}/src"         \
     -w "${BACKEND}/Cargo.toml"  \
     -w "${BACKEND}/Rocket.toml" \
+    -w "$THIS_FILE"             \
+    -w "$SHARE_FILE"            \
     -x "run --bin $BACKEND_BIN $CARGO_ARGS"
 }
 
 # Watch and recompile frontend crate
 function watch_frontend {
+  local build_script="${ROOT}/bin/build-frontend"
   cargo watch                   \
     -w "${FRONTEND}/src"        \
     -w "${FRONTEND}/Cargo.toml" \
-    -s "${ROOT}/bin/build-frontend"
+    -w "$THIS_FILE"             \
+    -w "$SHARE_FILE"            \
+    -w "$build_script"          \
+    -s "$build_script"
 }
 
 watch_frontend &

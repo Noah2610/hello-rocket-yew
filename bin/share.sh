@@ -9,7 +9,11 @@ BACKEND="${ROOT}/backend"
 BACKEND_BIN="hello-rocket-yew-backend"
 FRONTEND="${ROOT}/frontend"
 FRONTEND_BIN="hello-rocket-yew-frontend"
-STATIC="${BACKEND}/static"
+STATIC_BACKEND="${BACKEND}/static"
+STATIC_FRONTEND="${FRONTEND}/static"
+JS_RUNTIME="library-es6"
 
 CARGO_ARGS=
 [ "$PROFILE" == "release" ] && CARGO_ARGS="--release"
+
+export RUSTUP_TOOLCHAIN="nightly-2019-09-05"
