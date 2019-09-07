@@ -22,6 +22,11 @@ impl Component for EntryList {
     fn update(&mut self, _msg: Self::Message) -> ShouldRender {
         false
     }
+
+    fn change(&mut self, props: Self::Properties) -> ShouldRender {
+        self.entries = props.entries;
+        true
+    }
 }
 
 impl Renderable<EntryList> for EntryList {

@@ -44,6 +44,11 @@ impl Component for TodoApp {
             Msg::ReceiveData(data) => {
                 self.fetching_data = false;
                 self.fetch_task = None;
+                if let Ok(json_data) = json::parse(data.as_str()) {
+                    self.json_data = Some(json_data);
+                } else {
+                    console::error("Failed parsing data to JSON");
+                }
                 true
             }
             Msg::ReceiveError(status) => {
@@ -87,6 +92,7 @@ impl Renderable<TodoApp> for TodoApp {
         } else {
             Vec::new()
         };
+
         html! {
             <div>
                 <p>
