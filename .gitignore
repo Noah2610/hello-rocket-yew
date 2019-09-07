@@ -6,5 +6,5 @@
 *.log
 /bin/util.sh
 
-# Backend
+/static
 /backend/static

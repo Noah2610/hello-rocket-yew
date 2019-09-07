@@ -18,5 +18,5 @@ pub fn index() -> Markup {
 
 #[get("/static/<path..>")]
 pub fn static_file(path: PathBuf) -> Option<NamedFile> {
-    NamedFile::open(Path::new("backend/static/").join(path)).ok()
+    NamedFile::open(Path::new("static/").join(path)).ok()
 }
